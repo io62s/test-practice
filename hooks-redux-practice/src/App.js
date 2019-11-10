@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 function App() {
   const [value, handleValueChange, resetValue] = useInput("");
   const [email, handleEmailChange] = useInput("");
+
   const count = useSelector(state => state.count);
   const dispatch = useDispatch();
 
