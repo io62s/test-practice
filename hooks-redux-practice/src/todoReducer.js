@@ -1,5 +1,6 @@
 const initialState = {
-  data: []
+  data: [],
+  postNum: 1
 };
 
 export default function todoReducer(state = initialState, action) {
@@ -7,7 +8,13 @@ export default function todoReducer(state = initialState, action) {
     case "FETCH_DATA":
       return {
         ...state,
-        data: action.payload
+        data: state.data.concat(action.payload),
+        postNum: state.postNum + 1
+      };
+    case "CLEAR_DATA":
+      return {
+        ...state,
+        data: []
       };
 
     default:

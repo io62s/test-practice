@@ -1,12 +1,14 @@
 import axios from "axios";
-export const getData = () => {
+export const getData = postNum => {
   return async dispatch => {
-    const res = await axios.get("https://jsonplaceholder.typicode.com/todos");
+    const res = await axios.get(
+      `https://jsonplaceholder.typicode.com/todos/${postNum}`
+    );
     const data = await res.data;
 
     return dispatch({
       type: "FETCH_DATA",
-      payload: data.slice(0, 20)
+      payload: data
     });
   };
 };
