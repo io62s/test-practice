@@ -14,7 +14,8 @@ export default function todoReducer(state = initialState, action) {
     case "CLEAR_DATA":
       return {
         ...state,
-        data: []
+        data: [],
+        postNum: 1
       };
 
     default:

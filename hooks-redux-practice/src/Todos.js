@@ -11,23 +11,29 @@ const Todos = () => {
   const handlePostFetch = () => {
     dispatch(getData(postNum));
   };
-
+  useEffect(() => {
+    dispatch(getData(postNum));
+  }, []);
   console.log(postNum);
 
   return (
     <div>
-      <ol>
-        {todos.map(todo => (
-          <li key={todo.id}>
-            <p>Post Title: {todo.title}</p>
-            <p>Status: {todo.completed ? "completed" : "active"}</p>
-          </li>
-        ))}
-      </ol>
-      <button onClick={handlePostFetch}>Fetch Posts</button>
+      <button onClick={handlePostFetch}>Fetch Post</button>
       <button onClick={() => dispatch({ type: "CLEAR_DATA" })}>
         Clear Posts
       </button>
+      <ol>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <p>
+              Post Title: <strong>{todo.title}</strong>
+            </p>
+            <p>
+              Status: <strong>{todo.completed ? "completed" : "active"}</strong>
+            </p>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 };
