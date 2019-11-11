@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getData } from "./actions";
+import { getData, removeTodos, removeCompleted } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 
 const Todos = () => {
@@ -11,23 +11,35 @@ const Todos = () => {
   const handlePostFetch = () => {
     dispatch(getData(postNum));
   };
+
+  const remove = id => {
+    dispatch(removeTodos(id));
+  };
+
+  const filterCompleted = () => {
+    dispatch(removeCompleted());
+  };
   useEffect(() => {
     dispatch(getData(postNum));
+    // eslint-disable-next-line
   }, []);
-  console.log(postNum);
+
+  //console.log(todos);
 
   return (
     <div>
-      <button onClick={handlePostFetch}>Fetch Post</button>
+      <button onClick={handlePostFetch}>Next Todo</button>
       <button onClick={() => dispatch({ type: "CLEAR_DATA" })}>
-        Clear Posts
+        Clear Todods
       </button>
+      <button onClick={filterCompleted}>Filter Completed</button>
       <ol>
         {todos.map(todo => (
           <li key={todo.id}>
-            <p>
-              Post Title: <strong>{todo.title}</strong>
-            </p>
+            <span>
+              Todo Title: <strong>{todo.title}</strong>
+            </span>{" "}
+            <button onClick={() => remove(todo.id)}>Remove</button>
             <p>
               Status: <strong>{todo.completed ? "completed" : "active"}</strong>
             </p>

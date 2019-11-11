@@ -1,5 +1,6 @@
 const initialState = {
-  name: ""
+  name: "",
+  names: []
 };
 
 export default function(state = initialState, action) {
@@ -9,6 +10,17 @@ export default function(state = initialState, action) {
         ...state,
         name: action.payload
       };
+    case "SET_NAMES":
+      return {
+        ...state,
+        names: [...state.names, action.payload]
+      };
+    case "CLEAR_INPUT":
+      return {
+        ...state,
+        name: ""
+      };
+
     default:
       return state;
   }
