@@ -1,8 +1,10 @@
-const initialState = { count: 0 };
+const initialState = {
+  count: 0
+};
 
-export default (state = initialState, action) => {
+export default function countReducer(state = initialState, action) {
   switch (action.type) {
-    case "INCREMENT":
+    case "ICREMENT":
       return {
         ...state,
         count: state.count + 1
@@ -16,4 +18,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
