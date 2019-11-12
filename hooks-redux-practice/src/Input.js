@@ -29,7 +29,7 @@ const Input = () => {
           required
           type="text"
           name="name"
-          placeholder="Enter name"
+          placeholder="Name"
           value={name}
           onChange={handleInputChange}
         />
@@ -37,7 +37,7 @@ const Input = () => {
           required
           name="email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Email"
           value={email}
           onChange={handleInputChange}
         />
@@ -45,7 +45,7 @@ const Input = () => {
           required
           name="pass"
           type="password"
-          placeholder="Enter password"
+          placeholder="Password"
           value={pass}
           onChange={handleInputChange}
         />

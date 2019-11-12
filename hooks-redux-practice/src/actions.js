@@ -1,5 +1,6 @@
 import axios from "axios";
 import uuid from "uuid/v4";
+
 ///todos action///
 export const getData = postNum => {
   return async dispatch => {
@@ -21,6 +22,12 @@ export const removeTodos = id => {
     payload: id
   };
 };
+export const setComplete = todo => {
+  return {
+    type: "SET_COMPLETE",
+    payload: todo
+  };
+};
 
 export const removeCompleted = () => {
   return {
@@ -30,7 +37,6 @@ export const removeCompleted = () => {
 };
 
 ///input actions///
-
 export const setInput = (inputName, inputVal) => {
   return {
     type: "SET_INPUT",

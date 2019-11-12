@@ -16,6 +16,18 @@ export default function todoReducer(state = initialState, action) {
         ...state,
         data: state.data.filter(todo => todo.id !== action.payload)
       };
+    case "SET_COMPLETE":
+      return {
+        ...state,
+        data: state.data.map(todo =>
+          todo.id === action.payload.id
+            ? {
+                ...action.payload,
+                completed: !action.payload.completed
+              }
+            : todo
+        )
+      };
     case "REMOVE_COMPLETED":
       return {
         ...state,

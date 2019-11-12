@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getData, removeTodos, removeCompleted } from "./actions";
+import { getData, removeTodos, removeCompleted, setComplete } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 
 const Todos = () => {
@@ -16,6 +16,10 @@ const Todos = () => {
     dispatch(removeTodos(id));
   };
 
+  const setCompleted = todo => {
+    dispatch(setComplete(todo));
+  };
+
   const filterCompleted = () => {
     dispatch(removeCompleted());
   };
@@ -23,8 +27,6 @@ const Todos = () => {
     dispatch(getData(postNum));
     // eslint-disable-next-line
   }, []);
-
-  //console.log(todos);
 
   return (
     <div>
@@ -34,14 +36,22 @@ const Todos = () => {
       </button>
       <button onClick={filterCompleted}>Filter Completed</button>
       <ol>
-        {todos.map(({ id, title, completed }) => (
-          <li key={id}>
+        {todos.map(todo => (
+          <li key={todo.id}>
             <span>
-              Todo Title: <strong>{title}</strong>
+              Todo Title: <strong>{todo.title}</strong>
             </span>{" "}
-            <button onClick={() => remove(id)}>Remove</button>
+            <button onClick={() => remove(todo.id)}>X</button>
+            <button onClick={() => setCompleted(todo)}>
+              {todo.completed ? "activate" : "complete"}
+            </button>
             <p>
-              Status: <strong>{completed ? "completed" : "active"}</strong>
+              Status:{" "}
+              <strong
+                style={{ color: `${todo.completed ? "limegreen" : "red"}` }}
+              >
+                {todo.completed ? "completed" : "active"}
+              </strong>
             </p>
           </li>
         ))}
