@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setName, setNames } from "./actions";
+import { setInput, setInputData } from "./actions";
 
 const Input = () => {
   const inputState = useSelector(state => state.inputReducer);
@@ -10,14 +10,14 @@ const Input = () => {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    dispatch(setName(name, value));
+    dispatch(setInput(name, value));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
     dispatch({ type: "CLEAR_INPUT" });
-    dispatch(setNames(name, email, pass));
+    dispatch(setInputData(name, email, pass));
     inputRef.current.focus();
   };
 

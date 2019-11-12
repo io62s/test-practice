@@ -31,13 +31,13 @@ export const removeCompleted = () => {
 
 ///input actions///
 
-export const setName = (inputName, inputVal) => {
+export const setInput = (inputName, inputVal) => {
   return {
     type: "SET_INPUT",
     payload: { inputName, inputVal }
   };
 };
-export const setNames = (name, email, pass) => {
+export const setInputData = (name, email, pass) => {
   return {
     type: "SET_NAMES",
     payload: { name, email, pass, id: uuid() }
