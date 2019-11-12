@@ -1,14 +1,16 @@
 const initialState = {
   name: "",
+  email: "",
+  pass: "",
   names: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case "SET_NAME":
+    case "SET_INPUT":
       return {
         ...state,
-        name: action.payload
+        [action.payload.inputName]: action.payload.inputVal
       };
     case "SET_NAMES":
       return {
@@ -18,7 +20,9 @@ export default function(state = initialState, action) {
     case "CLEAR_INPUT":
       return {
         ...state,
-        name: ""
+        name: "",
+        email: "",
+        pass: ""
       };
 
     default:

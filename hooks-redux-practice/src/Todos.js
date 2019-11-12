@@ -34,14 +34,14 @@ const Todos = () => {
       </button>
       <button onClick={filterCompleted}>Filter Completed</button>
       <ol>
-        {todos.map(todo => (
-          <li key={todo.id}>
+        {todos.map(({ id, title, completed }) => (
+          <li key={id}>
             <span>
-              Todo Title: <strong>{todo.title}</strong>
+              Todo Title: <strong>{title}</strong>
             </span>{" "}
-            <button onClick={() => remove(todo.id)}>Remove</button>
+            <button onClick={() => remove(id)}>Remove</button>
             <p>
-              Status: <strong>{todo.completed ? "completed" : "active"}</strong>
+              Status: <strong>{completed ? "completed" : "active"}</strong>
             </p>
           </li>
         ))}

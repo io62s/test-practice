@@ -3,23 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { setName, setNames } from "./actions";
 
 const Input = () => {
-  const name = useSelector(state => state.inputReducer.name);
-  const names = useSelector(state => state.inputReducer.names);
+  const inputState = useSelector(state => state.inputReducer);
+  const { name, email, pass, names } = inputState;
   const dispatch = useDispatch();
-
   const inputRef = useRef();
 
   const handleInputChange = e => {
-    dispatch(setName(e.target.value));
+    const { name, value } = e.target;
+    dispatch(setName(name, value));
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!name) {
-      return;
-    }
+
     dispatch({ type: "CLEAR_INPUT" });
-    dispatch(setNames(name));
+    dispatch(setNames(name, email, pass));
     inputRef.current.focus();
   };
 
@@ -28,17 +26,37 @@ const Input = () => {
       <form onSubmit={handleSubmit}>
         <input
           ref={inputRef}
+          required
           type="text"
+          name="name"
           placeholder="Enter name"
           value={name}
           onChange={handleInputChange}
         />
-        <button type="submit">Submit Name</button>
+        <input
+          required
+          name="email"
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={handleInputChange}
+        />
+        <input
+          required
+          name="pass"
+          type="password"
+          placeholder="Enter password"
+          value={pass}
+          onChange={handleInputChange}
+        />
+        <button type="submit">Submit</button>
       </form>
       <div>
-        {names.map(({ name, id }) => (
+        {names.map(({ name, email, pass, id }) => (
           <div key={id}>
             <h4>Name: {name}</h4>
+            <h4>Email: {email}</h4>
+            <h4>Password: {pass}</h4>
             <p>ID: {id}</p>
             <hr />
           </div>
