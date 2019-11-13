@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { getData, removeTodos, removeCompleted, setComplete } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 
+import { useSpring, animated } from "react-spring";
+
 const Todos = () => {
   const todos = useSelector(state => state.todoReducer.data);
   const postNum = useSelector(state => state.todoReducer.postNum);
@@ -32,6 +34,12 @@ const Todos = () => {
     // eslint-disable-next-line
   }, []);
 
+  const fadeIn = useSpring({
+    transform: "translateY(0)",
+    from: { transform: "translateY(-60%)" },
+    duration: 500
+  });
+
   return (
     <div>
       <button onClick={handlePostFetch}>Next Todo</button>
@@ -39,7 +47,7 @@ const Todos = () => {
       <button onClick={filterCompleted}>Filter Completed</button>
       <ol>
         {todos.map(todo => (
-          <li key={todo.id}>
+          <animated.li style={fadeIn} key={todo.id}>
             <span>
               Todo Title: <strong>{todo.title}</strong>
             </span>{" "}
@@ -55,7 +63,7 @@ const Todos = () => {
                 {todo.completed ? "completed" : "active"}
               </strong>
             </p>
-          </li>
+          </animated.li>
         ))}
       </ol>
     </div>
