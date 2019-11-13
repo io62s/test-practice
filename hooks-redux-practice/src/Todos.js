@@ -12,7 +12,7 @@ const Todos = () => {
     dispatch(getData(postNum));
   };
 
-  const remove = id => {
+  const removeTodo = id => {
     dispatch(removeTodos(id));
   };
 
@@ -23,6 +23,10 @@ const Todos = () => {
   const filterCompleted = () => {
     dispatch(removeCompleted());
   };
+
+  const clearAllTodos = () => {
+    dispatch({ type: "CLEAR_DATA" });
+  };
   useEffect(() => {
     dispatch(getData(postNum));
     // eslint-disable-next-line
@@ -31,9 +35,7 @@ const Todos = () => {
   return (
     <div>
       <button onClick={handlePostFetch}>Next Todo</button>
-      <button onClick={() => dispatch({ type: "CLEAR_DATA" })}>
-        Clear Todods
-      </button>
+      <button onClick={clearAllTodos}>Clear Todods</button>
       <button onClick={filterCompleted}>Filter Completed</button>
       <ol>
         {todos.map(todo => (
@@ -41,7 +43,7 @@ const Todos = () => {
             <span>
               Todo Title: <strong>{todo.title}</strong>
             </span>{" "}
-            <button onClick={() => remove(todo.id)}>X</button>
+            <button onClick={() => removeTodo(todo.id)}>X</button>
             <button onClick={() => setCompleted(todo)}>
               {todo.completed ? "activate" : "complete"}
             </button>
